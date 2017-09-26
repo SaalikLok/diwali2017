@@ -1,0 +1,108 @@
+//Colors
+$wonka-purple: #580A82;
+$wonka-purpleLight: #9A66B5;
+$yellow: #FFEA74;
+$yellowLight: #FFFDE8;
+$white: #ffffff;
+
+//Fonts
+@font-face{
+  font-family: OleoScript;
+  src: url(./fonts/OleoScript-Regular.ttf);
+}
+@font-face{
+  font-family: ReemKufi;
+  src: url('./fonts/ReemKufi-Regular.ttf');
+}
+
+$Oleo: OleoScript;
+$Reem: ReemKufi;
+
+//Mixins
+@mixin linear-gradient($angle, $color-stops...) {
+  $_angle-with-vendor-prefix: "";
+  $_angle: "";
+  @if $angle == "to top" or $angle == "bottom" {
+    $_angle-with-vendor-prefix: bottom;
+    $_angle: to top;
+  } @else if $angle == "to right" or $angle == "left" {
+    $_angle-with-vendor-prefix: left;
+    $_angle: to right;
+  } @else if $angle == "to bottom" or $angle == "top" {
+    $_angle-with-vendor-prefix: top;
+    $_angle: to bottom;
+  } @else if $angle == "to left" or $angle == "right" {
+    $_angle-with-vendor-prefix: right;
+    $_angle: to left;
+  } @else if $angle == "to top right" or $angle == "bottom left" {
+    $_angle-with-vendor-prefix: bottom left;
+    $_angle: to top right;
+  } @else if $angle == "to bottom right" or $angle == "top left" {
+    $_angle-with-vendor-prefix: top left;
+    $_angle: to bottom right;
+  } @else if $angle == "to bottom left" or $angle == "top right" {
+    $_angle-with-vendor-prefix: top right;
+    $_angle: to bottom left;
+  } @else if $angle == "to top left" or $angle == "bottom right" {
+    $_angle-with-vendor-prefix: bottom right;
+    $_angle: to top left;
+  } @else {
+    $_angle-with-vendor-prefix: $angle % 360;
+    $_angle: (90 - $angle) % 360;
+  }
+  background: -webkit-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+  background: -moz-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+  background: -o-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+  background: linear-gradient($_angle, $color-stops);
+}
+
+
+//Styles
+section{
+  padding-top: 0px;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+//Parent Class
+.heading{
+  font-family: $Oleo;
+  text-align: center;
+  color: $white;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.siteHeading{
+  margin-top: 8vh;
+}
+
+h1{
+  @extend .heading;
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+h2{
+  @extend .heading;
+  margin-top: 0;
+  font-size: 1;
+}
+
+h3{
+  @extend .heading;
+  font-size: 1.2em;
+  font-family: $Reem;
+}
+
+//Gradients
+.purple{
+  @include linear-gradient("bottom right", #580A82, #9A66B5);
+}
+
+//Image Styles
+.siteImg{
+  width: 20%;
+  height: auto;
+}
+
