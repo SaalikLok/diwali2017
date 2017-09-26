@@ -95,6 +95,10 @@ h3{
   font-family: $Reem;
 }
 
+.large{
+  font-size: 2.4em;
+}
+
 //Gradients
 .purple{
   @include linear-gradient("bottom right", #580A82, #9A66B5);
