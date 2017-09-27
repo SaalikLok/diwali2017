@@ -8,14 +8,6 @@ let currentMoment = moment().unix();
 
 let diffTime = diwaliMoment - currentMoment;
 
-let diffDay = Math.round(diffTime/86400);
-let diffHour= Math.round((diffTime%86400)/3600);
-let diffMin = Math.round(((diffTime%86400)%3600)/60);
-let diffSec = Math.round(diffTime%60);
-
-let diffTrySec = diffTime%60;
-
-
 class FirstCountdown extends Component{
 	
 	constructor(props){
