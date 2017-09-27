@@ -3,7 +3,14 @@ $wonka-purple: #580A82;
 $wonka-purpleLight: #9A66B5;
 $yellow: #FFEA74;
 $yellowLight: #FFFDE8;
+$green: #A5FF74;
+$greenLight: #EFFFE8;
+$blue: #74B1FF;
+$blueLight: #E8F0FF;
+$purple: #A174FF;
+$purpleLight: #F1E8FF;
 $white: #ffffff;
+$darkgrey: #a4a4a4;
 
 //Fonts
 @font-face{
@@ -75,18 +82,19 @@ section{
 
 .siteHeading{
   margin-top: 8vh;
+  font-size: 4em;
 }
 
 h1{
   @extend .heading;
   font-size: 3em;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 h2{
   @extend .heading;
   margin-top: 0;
-  font-size: 1;
+  font-size: 2em;
 }
 
 h3{
@@ -96,12 +104,29 @@ h3{
 }
 
 .large{
+  margin-top: 10px;
   font-size: 2em;
 }
 
 //Gradients
 .purple{
   @include linear-gradient("bottom right", #580A82, #9A66B5);
+}
+
+.yellow{
+  @include linear-gradient("top right", #FFEA74, #FFFDE8);
+}
+
+.blue{
+  @include linear-gradient("top right", #74B1FF, #E8F0FF);
+}
+
+.otherPurple{
+  @include linear-gradient("top right", #A174FF, #F1E8FF);
+}
+
+.green{
+  @include linear-gradient("top right", #A5FF74, #EFFFE8);
 }
 
 //Image Styles
