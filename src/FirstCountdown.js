@@ -1,26 +1,19 @@
 import React, {Component} from 'react';
-import Moment from 'react-moment';
 import moment from 'moment';
 import './style.css';
 
 const diwaliDate = '2017-11-10 19:10:10';
-const diwaliMoment = moment(diwaliDate, 'YYYY-MM-DD HH:mm:ss');
+const diwaliMoment = moment(diwaliDate, 'YYYY-MM-DD HH:mm:ss').unix();
 let currentMoment = moment().unix();
 
-const diwaliDay = diwaliMoment.dayOfYear();
-const diwaliHour = diwaliMoment.hours();
-const diwaliMin = diwaliMoment.minutes();
-const diwaliSec = diwaliMoment.seconds();
-
 let diffTime = diwaliMoment - currentMoment;
-console.log(diffTime);
-let duration = moment.duration(diffTime * 1000, "milliseconds");
-console.log(duration.humanize());
 
-let diffDay = duration.day;
-let diffHour= 0;
-let diffMin = 0;
-let diffSec = 0;
+let diffDay = Math.round(diffTime/86400);
+let diffHour= Math.round((diffTime%86400)/3600);
+let diffMin = Math.round(((diffTime%86400)%3600)/60);
+let diffSec = Math.round(diffTime%60);
+
+let diffTrySec = diffTime%60;
 
 
 class FirstCountdown extends Component{
@@ -28,29 +21,32 @@ class FirstCountdown extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			currentTime: moment().format(),
-			currentDay: moment().dayOfYear(),
-			currentHour: moment().hour(),
-			currentMin: moment().minutes(),
-			currentSec: moment().seconds(),
+			currentTime: moment().unix(),
+			diffTime: diwaliMoment - currentMoment,
+			diffDay: Math.round(diffTime/86400),
+			diffHour: Math.round((diffTime%86400)/3600),
+			diffMin: Math.round(((diffTime%86400)%3600)/60),
+			diffSec: Math.round(diffTime%60)
 		};
 		this.tick = this.tick.bind(this);
 	}
 
+//What happens every tick - update the current time, and set the state of the difference between current and Diwali time.
 	tick(){
 		this.setState({
-			currentTime: moment().format(),
-			currentDay: moment().dayOfYear(),
-			currentHour: moment().hour(),
-			currentMin: moment().minutes(),
-			currentSec: moment().seconds()
+			currentTime: moment().unix(),
+			diffTime: diwaliMoment - this.state.currentTime,
+			diffDay: Math.round(this.state.diffTime/86400),
+			diffSec: Math.round(this.state.diffTime%60)
 		});
+		
+		if(this.state.diffMin === 0){
+				this.setState({diffHour: this.state.diffHour - 1});
+		}
 
-		diffDay = diwaliDay - this.state.currentDay;
-		diffHour = diwaliHour - this.state.currentHour;
-		diffMin = diwaliMin - this.state.currentMin;
-		diffSec = diwaliSec - this.state.currentSec;
-
+		if(this.state.diffSec === 0){
+				this.setState({diffMin: this.state.diffMin - 1});
+		}
 	}
 
 	componentDidMount(){
@@ -65,14 +61,7 @@ class FirstCountdown extends Component{
 		return(
 		<div>
       		<h3>The show starts in...</h3>
-      		
-      		{/*<h3><Moment>{diwaliDate}</Moment></h3>
-      		<h3><Moment>{this.state.currentTime}</Moment></h3>
-      		<h3>Right now it is {this.state.currentDay} days, {this.state.currentHour} hours, {this.state.currentMin} minutes, {this.state.currentSec} seconds.</h3>
-      		*/}
-
-      		<h3 className="large">{diffDay} days!</h3>
-
+      		<h3 className="large">{this.state.diffDay} days, {this.state.diffHour} hours, {this.state.diffMin} minutes, {this.state.diffSec} seconds</h3>
 		</div>
 		)
 	}
