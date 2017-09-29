@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import moment from 'moment';
 import './style.css';
 
-const diwaliDate = '2017-11-10 19:10:10';
+const diwaliDate = '2017-11-10 17:00:30';
 const diwaliMoment = moment(diwaliDate, 'YYYY-MM-DD HH:mm:ss').unix();
 let currentMoment = moment().unix();
 
@@ -15,10 +15,10 @@ class FirstCountdown extends Component{
 		this.state = {
 			currentTime: moment().unix(),
 			diffTime: diwaliMoment - currentMoment,
-			diffDay: Math.round(diffTime/86400),
-			diffHour: Math.round((diffTime%86400)/3600),
-			diffMin: Math.round(((diffTime%86400)%3600)/60),
-			diffSec: Math.round(diffTime%60)
+			diffDay: (diffTime/86400),
+			diffHour: ((diffTime%86400)/3600),
+			diffMin: (((diffTime%86400)%3600)/60),
+			diffSec: (diffTime%60)
 		};
 		this.tick = this.tick.bind(this);
 	}
@@ -28,17 +28,15 @@ class FirstCountdown extends Component{
 		this.setState({
 			currentTime: moment().unix(),
 			diffTime: diwaliMoment - this.state.currentTime,
-			diffDay: Math.round(this.state.diffTime/86400),
-			diffSec: Math.round(this.state.diffTime%60)
+			diffDay: (this.state.diffTime/86400),
+			diffHour: ((this.state.diffTime%86400)/3600),
+			diffMin: (((this.state.diffTime%86400)%3600)/60),
+			diffSec: (this.state.diffTime%60)
 		});
-		
-		if(this.state.diffMin === 0){
-				this.setState({diffHour: this.state.diffHour - 1});
-		}
 
-		if(this.state.diffSec === 0){
-				this.setState({diffMin: this.state.diffMin - 1});
-		}
+		/*if(this.state.diffSec === 0){
+			this.setState({diffMin: (((diffTime%86400)%3600)/60)});
+		}*/
 	}
 
 	componentDidMount(){
@@ -53,7 +51,7 @@ class FirstCountdown extends Component{
 		return(
 		<div>
       		<h3>The show starts in...</h3>
-      		<h3 className="large">{this.state.diffDay} days, {this.state.diffHour} hours, {this.state.diffMin} minutes, {this.state.diffSec} seconds</h3>
+      		<h3 className="large">{Math.round(this.state.diffDay)} days, {Math.round(this.state.diffHour)} hours, {Math.round(this.state.diffMin)} minutes, {Math.round(this.state.diffSec)} seconds</h3>
 		</div>
 		)
 	}
