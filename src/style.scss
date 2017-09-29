@@ -3,7 +3,14 @@ $wonka-purple: #580A82;
 $wonka-purpleLight: #9A66B5;
 $yellow: #FFEA74;
 $yellowLight: #FFFDE8;
+$green: #A5FF74;
+$greenLight: #EFFFE8;
+$blue: #74B1FF;
+$blueLight: #E8F0FF;
+$purple: #A174FF;
+$purpleLight: #F1E8FF;
 $white: #ffffff;
+$darkgrey: #4a4a4a;
 
 //Fonts
 @font-face{
@@ -19,6 +26,7 @@ $Oleo: OleoScript;
 $Reem: ReemKufi;
 
 //Mixins
+//Linear Gradient Mixin
 @mixin linear-gradient($angle, $color-stops...) {
   $_angle-with-vendor-prefix: "";
   $_angle: "";
@@ -56,6 +64,22 @@ $Reem: ReemKufi;
   background: linear-gradient($_angle, $color-stops);
 }
 
+//Material Box Shadow Mixin
+@mixin box_shadow ($level) {
+
+    @if $level == 1 {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    } @else if $level == 2 {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    } @else if $level == 3 {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    } @else if $level == 4 {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    } @else if $level == 5 {
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+
+}
 
 //Styles
 section{
@@ -64,7 +88,25 @@ section{
   min-height: 100vh;
 }
 
-//Parent Class
+.button{
+  width: 115px;
+  height: 35px;
+  background-color: $yellowLight;
+  font-family: $Reem;
+  font-size: 18px;
+  border-radius: 5%;
+  text-align: center;
+  color: $darkgrey;
+  margin: 0 auto;
+  display: block;
+  transition: background-color 0.5s ease;
+  @include box_shadow (2);
+}
+.button:hover{
+    background-color: $yellow;
+  }
+
+//Text Styles 
 .heading{
   font-family: $Oleo;
   text-align: center;
@@ -73,8 +115,15 @@ section{
   font-weight: 300;
 }
 
+.mainText{
+  font-family: $Reem;
+  text-align: center;
+  color: $white;
+}
+
 .siteHeading{
-  margin-top: 8vh;
+  margin-top: 5vh;
+  font-size: 4em;
 }
 
 h1{
@@ -86,17 +135,21 @@ h1{
 h2{
   @extend .heading;
   margin-top: 0;
-  font-size: 1;
+  font-size: 1.8em;
 }
 
 h3{
-  @extend .heading;
+  @extend .mainText;
   font-size: 1.2em;
-  font-family: $Reem;
 }
 
 .large{
   font-size: 2em;
+}
+
+p{
+  @extend .mainText;
+
 }
 
 //Gradients
@@ -104,6 +157,21 @@ h3{
   @include linear-gradient("bottom right", #580A82, #9A66B5);
 }
 
+.yellow{
+  @include linear-gradient("bottom right", #FFEA74, #FFFDE8);
+}
+
+.green{
+  @include linear-gradient("bottom right", #A5FF74, #EFFFE8);
+}
+
+.blue{
+  @include linear-gradient("bottom right", #74B1FF, #E8F0FF);
+}
+
+.otherPurple{
+  @include linear-gradient("bottom right", #A174FF, #F1E8FF);
+}
 //Image Styles
 .siteImg{
   width: 20%;

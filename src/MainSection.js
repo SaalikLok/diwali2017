@@ -11,6 +11,8 @@ function SiteSection(props){
       		<h2>{props.subtitle}</h2>
       		<br/>
       		<FirstCountdown/>
+      		<p>Want to be part of the show?</p>
+      		<a href="https://goo.gl/forms/4ZrRwnFDGaEmOTGl2" target="_blank"><div className="button">Get Involved!</div></a>
       	</section>
       </div>
     )
