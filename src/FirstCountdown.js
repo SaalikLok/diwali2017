@@ -48,12 +48,19 @@ class FirstCountdown extends Component{
 	}
 	
 	render(){
-		return(
-		<div>
-      		<h3>The show starts in...</h3>
-      		<h3 className="large">{Math.round(this.state.diffDay)} days, {Math.round(this.state.diffHour)} hours, {Math.round(this.state.diffMin)} minutes, {Math.round(this.state.diffSec)} seconds</h3>
-		</div>
-		)
+		if(this.state.diffSec < 0){
+			return(
+				<h3>The Show Has Completed!</h3>
+			)
+		}
+		else{
+			return(
+				<div>
+					  <h3>The show starts in...</h3>
+					  <h3 className="large">{Math.round(this.state.diffDay)} days, {Math.round(this.state.diffHour)} hours, {Math.round(this.state.diffMin)} minutes, {Math.round(this.state.diffSec)} seconds</h3>
+				</div>
+				)
+		}
 	}
 }
 
